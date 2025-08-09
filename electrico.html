@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Eléctrico - Geely CK Parts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c5e92;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --electric-blue: #1e88e5;
+            --electric-yellow: #ffd600;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e6e9f0 100%);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 50px;
+            filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
+        }
+
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #ffd700;
+        }
+
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            background-color: rgba(255,255,255,0.15);
+        }
+
+        nav a.active {
+            background-color: rgba(255,255,255,0.25);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 94, 146, 0.8), rgba(44, 94, 146, 0.9)), url('https://images.unsplash.com/photo-1581093458797-efb6e2ee0e1e?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        }
+
+        .btn-electric {
+            background-color: var(--electric-blue);
+        }
+
+        .btn-electric:hover {
+            background-color: #0d47a1;
+        }
+
+        /* Categories Section */
+        .section-title {
+            text-align: center;
+            margin: 60px 0 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .section-title.electric {
+            color: var(--electric-blue);
+        }
+
+        .section-title.electric:after {
+            background: var(--electric-blue);
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .category-img {
+            height: 200px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary);
+        }
+
+        .category-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .category-content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        /* Products Section */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border-top: 4px solid var(--electric-blue);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .product-img {
+            height: 200px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .product-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+
+        .product-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .product-content p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .product-price {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 10px 0;
+        }
+
+        .product-badge {
+            background-color: var(--electric-blue);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin: 60px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--electric-blue);
+        }
+
+        .about-content {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--electric-blue);
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+        }
+
+        .features {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feature i {
+            font-size: 1.8rem;
+            color: var(--electric-blue);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--electric-blue), var(--dark));
+            color: white;
+            padding: 60px 0;
+            margin-top: 60px;
+        }
+
+        .contact .section-title {
+            color: white;
+        }
+
+        .contact .section-title:after {
+            background: var(--electric-yellow);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--electric-yellow);
+            min-width: 30px;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+            color: var(--electric-yellow);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .contact-form h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h4 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 15px 0;
+            background-color: var(--light);
+            margin-bottom: 30px;
+        }
+        
+        .breadcrumb ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .breadcrumb li {
+            margin-right: 10px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .breadcrumb li:after {
+            content: '/';
+            margin-left: 10px;
+        }
+        
+        .breadcrumb li:last-child:after {
+            content: '';
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .features {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero {
+                padding: 70px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-car-alt fa-2x"></i>
+                <h1>Geely <span>CK</span> Parts</h1>
+            </div>
+            <nav>
+                <ul>
+                    <!-- Enlace a inicio.html -->
+                    <li><a href="inicio.html">Inicio</a></li>
+                    <li><a href="#">Piezas</a></li>
+                    <li><a href="#" class="active">Categorías</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <!-- Enlace a inicio.html -->
+                <li><a href="inicio.html">Inicio</a></li>
+                <li><a href="#">Categorías</a></li>
+                <li><span>Sistema Eléctrico</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Sistema Eléctrico Geely CK</h2>
+                <p>Componentes eléctricos de alta calidad para un rendimiento óptimo</p>
+                <a href="#productos" class="btn btn-electric">Ver Productos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="container" id="productos">
+        <h2 class="section-title electric">Componentes Eléctricos</h2>
+        <div class="products">
+            <!-- Alternador -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="alternador.webp" alt="Alternador Geely CK">
+                </div>
+                <div class="product-content">
+                    <span class="product-badge">Garantía extendida</span>
+                    <h3>Alternador</h3>
+                    <p>Alternador original para carga eficiente de la batería. Garantiza el suministro eléctrico constante.</p>
+                    <div class="product-price">$200.00</div>
+                    <a href="#" class="btn btn-electric">Añadir al Carrito</a>
+                </div>
+            </div>
+            
+            <!-- Motor de arranque -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="motordearranque.webp" alt="Motor de Arranque Geely CK">
+                </div>
+                <div class="product-content">
+                    <span class="product-badge">Más vendido</span>
+                    <h3>Motor de Arranque</h3>
+                    <p>Motor de arranque de alto rendimiento para encendido rápido y confiable en todas las condiciones.</p>
+                    <div class="product-price">$120.00</div>
+                    <a href="#" class="btn btn-electric">Añadir al Carrito</a>
+                </div>
+            </div>
+            
+            <!-- Sensor de posición -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="sensordeposicion.webp" alt="Sensor de Posición Geely CK">
+                </div>
+                <div class="product-content">
+                    <span class="product-badge">Oferta</span>
+                    <h3>Sensor de Posición</h3>
+                    <p>Sensor de posición preciso para el sistema de inyección. Mejora el rendimiento del motor.</p>
+                    <div class="product-price">$35.00</div>
+                    <a href="#" class="btn btn-electric">Añadir al Carrito</a>
+                </div>
+            </div>
+            
+            <!-- Computadora -->
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="computadora.webp" alt="Computadora Geely CK">
+                </div>
+                <div class="product-content">
+                    <span class="product-badge">Premium</span>
+                    <h3>Computadora</h3>
+                    <p>Unidad de control electrónico original para gestión óptima del sistema del vehículo.</p>
+                    <div class="product-price">$90.00</div>
+                    <a href="#" class="btn btn-electric">Añadir al Carrito</a>
+                </div>
+            </div>
+            
+            <!-- Batería -->
+            <div class="product-card">
+                <div class="product-img">
+                    <i class="fas fa-battery-full fa-4x" style="color: #2c5e92;"></i>
+                </div>
+                <div class="product-content">
+                    <h3>Batería</h3>
+                    <p>Batería de alto rendimiento con capacidad de 60Ah. Ideal para climas extremos.</p>
+                    <div class="product-price">$95.00</div>
+                    <a href="#" class="btn btn-electric">Añadir al Carrito</a>
+                </div>
+            </div>
+            
+            <!-- Fusibles -->
+            <div class="product-card">
+                <div class="product-img">
+                    <i class="fas fa-bolt fa-4x" style="color: #2c5e92;"></i>
+                </div>
+                <div class="product-content">
+                    <h3>Kit de Fusibles</h3>
+                    <p>Kit completo con todos los fusibles necesarios para proteger el sistema eléctrico.</p>
+                    <div class="product-price">$25.00</div>
+                    <a href="#" class="btn btn-electric">Añadir al Carrito</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="container">
+        <div class="about">
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>¿Por qué elegir nuestros componentes eléctricos?</h3>
+                    <p>El sistema eléctrico es el sistema nervioso de tu vehículo. En Geely CK Parts ofrecemos componentes eléctricos de la más alta calidad, fabricados bajo los estándares originales para garantizar un rendimiento óptimo y confiable.</p>
+                    <p>Todas nuestras piezas incluyen garantía de 12 meses y contamos con envíos express a todo el país. Nuestros técnicos especializados están disponibles para asesorarte en cualquier duda sobre compatibilidad o instalación.</p>
+                    <a href="#" class="btn btn-electric">Ver todas las piezas</a>
+                </div>
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-bolt"></i>
+                        <div>
+                            <h4>Rendimiento Garantizado</h4>
+                            <p>Componentes testeados para máxima eficiencia</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-shipping-fast"></i>
+                        <div>
+                            <h4>Envío en 24 horas</h4>
+                            <p>Recibe tus piezas al día siguiente de tu compra</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-certificate"></i>
+                        <div>
+                            <h4>Calidad Certificada</h4>
+                            <p>Piezas originales con certificación de calidad</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-headset"></i>
+                        <div>
+                            <h4>Asesoramiento Especializado</h4>
+                            <p>Nuestros técnicos resuelven tus dudas eléctricas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">¿Necesitas ayuda con tu sistema eléctrico?</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Dirección</h4>
+                            <p>Calle Velazques No. 4 % Calzada de Infanta y San Juaquin</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Teléfono</h4>
+                            <p><a href="tel:+5355333506">+53 55333506</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:marcosantoniomorenorosales@gmail.com">marcosantoniomorenorosales@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Horario</h4>
+                            <p>Lun-Vie: 9:00 - 18:00<br>Sáb: 9:00 - 13:00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Consulta sobre sistema eléctrico</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" id="name" placeholder="Tu nombre">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="Tu email">
+                        </div>
+                        <div class="form-group">
+                            <label for="model">Modelo de Geely CK</label>
+                            <input type="text" id="model" placeholder="Modelo de tu vehículo">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" placeholder="Describe la pieza que necesitas"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-electric">Enviar Consulta</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h4>Geely CK Parts</h4>
+                    <p>Tu proveedor confiable de piezas originales para vehículos Geely CK. Calidad, garantía y servicio excepcional.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Categorías</h4>
+                    <ul>
+                        <li><a href="motor.html">Motor</a></li>
+                        <li><a href="frenos.html">Frenos</a></li>
+                        <li><a href="#" class="active">Eléctrico</a></li>
+                        <li><a href="#">Suspensión</a></li>
+                        <li><a href="#">Carrocería</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <!-- Enlace a inicio.html -->
+                        <li><a href="inicio.html">Inicio</a></li>
+                        <li><a href="#">Piezas</a></li>
+                        <li><a href="#">Ofertas</a></li>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">Garantías</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Newsletter</h4>
+                    <p>Suscríbete para recibir ofertas exclusivas en componentes eléctricos.</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" placeholder="Tu email">
+                        </div>
+                        <button type="submit" class="btn btn-electric">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Geely CK Parts. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript para el efecto de desplazamiento suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Cambiar clase activa en el menú de navegación
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
